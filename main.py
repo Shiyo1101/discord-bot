@@ -5,8 +5,10 @@ from dotenv import load_dotenv
 
 from lib.client import GenAIClient
 from lib.context import load_context
+from lib.server import keep_alive
 
 load_dotenv()
+keep_alive()
 
 
 def main():
