@@ -47,7 +47,8 @@ def main():
                     speaker_id=1,
                 )
                 if not voice_data:
-                    await message.channel.send("音声の生成に失敗したのだ。")
+                    await message.channel.send("☠️音声の生成に失敗したのだ。")
+                    raise RuntimeError("Failed to generate voice data")
 
                 # 一時的なファイルとして保存
                 filename = "output.wav"
@@ -61,8 +62,9 @@ def main():
                 except discord.ClientException:
                     vc = message.guild.voice_client
                     await message.channel.send(
-                        "すでにボイスチャンネルに参加しているのだ。"
+                        "⚠️すでにボイスチャンネルに参加しているのだ。"
                     )
+                    raise RuntimeError("Already connected to voice channel")
 
                 if vc and vc.is_connected():
                     vc.play(discord.FFmpegOpusAudio(filename))
@@ -71,10 +73,13 @@ def main():
                         await asyncio.sleep(1)
                     await vc.disconnect()
                 else:
-                    await message.channel.send("ボイスチャンネルの接続に失敗したのだ。")
+                    await message.channel.send(
+                        "☠️ボイスチャンネルの接続に失敗したのだ。"
+                    )
+                    raise RuntimeError("Failed to connect to voice channel")
             else:
                 await message.channel.send(
-                    "ボイスチャンネルに参加していると、ずんだもんがしゃべるのだ。"
+                    "※ボイスチャンネルに参加していると、ずんだもんがしゃべるのだ。"
                 )
 
             return
