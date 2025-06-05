@@ -24,11 +24,17 @@ class VoiceVoxClient:
     def generate_speech(
         self,
         text: str,
-        speaker_id: int = 1,
+        speaker_id: int = 1,  # ずんだもん
+        speed: float = 1.25,
     ) -> str:
         response: requests.Response = requests.post(
             url=f"{self.api_url}/audio",
-            params={"text": text, "speaker": speaker_id, "key": self.api_key},
+            params={
+                "text": text,
+                "speaker": speaker_id,
+                "speed": speed,
+                "key": self.api_key,
+            },
         )
 
         if response.status_code != 200:
