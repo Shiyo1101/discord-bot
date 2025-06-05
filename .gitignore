@@ -12,3 +12,5 @@ wheels/
 # environments
 .env
 
+# 一時的な音声ファイル
+output.wav

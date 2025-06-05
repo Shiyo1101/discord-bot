@@ -53,13 +53,3 @@ cp ./.env.sample ./.env
 ```bash
 uv run main.py
 ```
-
----
-
-## デプロイ用
-
-以下のコマンドを実行して、requirements.txt を生成します。
-
-```bash
-uv pip compile pyproject.toml > requirements.txt
-```
