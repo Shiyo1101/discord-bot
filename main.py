@@ -55,6 +55,11 @@ def main():
                 with open(filename, "wb") as f:
                     f.write(voice_data)
 
+                # ファイルの存在確認
+                if not os.path.exists(filename):
+                    await message.channel.send("☠️音声ファイルが見つからないのだ。")
+                    raise RuntimeError("Audio file not found")
+
                 channel = message.author.voice.channel
 
                 try:
