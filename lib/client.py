@@ -1,5 +1,6 @@
 import requests
 from google import genai
+from google.genai import types
 
 
 class GenAIClient:
@@ -8,9 +9,12 @@ class GenAIClient:
         self.context = context
 
     def generate_content(self, user_input: str) -> str:
-        prompt = f"{self.context}\nユーザー: {user_input}"
         response = self.client.models.generate_content(
-            model="gemini-2.0-flash", contents=prompt
+            model="gemini-2.0-flash",
+            config=types.GenerateContentConfig(
+                system_instruction=self.context,
+            ),
+            contents=user_input,
         )
 
         return response.text
